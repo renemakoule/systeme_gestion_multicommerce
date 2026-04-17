@@ -37,6 +37,7 @@
       ]
     },
     "nsis": {
+      "artifactName": "${productName}.exe",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
