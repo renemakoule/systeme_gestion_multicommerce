@@ -1,0 +1,255 @@
+CONTRAT DE LICENCE UTILISATEUR FINAL (CLUF) 
+POUR L'UTILISATION DU LOGICIEL GASNEXUS ET SES LOGICIELS ASSOCIES
+
+IMPORTANT - VEUILLEZ LIRE ATTENTIVEMENT LES CONDITIONS SUIVANTES AVANT DE CONTINUER 
+L'INSTALLATION DE CE LOGICIEL.
+
+En cliquant sur le bouton "J'accepte", en installant, en copiant ou en utilisant de 
+toute autre manière le logiciel, vous acceptez d'être lié par les termes de ce 
+Contrat de Licence Utilisateur Final (ci-après dénommé le "Contrat" ou le "CLUF"). 
+Si vous n'acceptez pas les termes de ce Contrat, vous n'êtes pas autorisé à 
+installer ni à utiliser ce logiciel et vous devez l'effacer de vos disques.
+
+--------------------------------------------------------------------------------------
+ARTICLE 1 : ACCEPTATION DU CONTRAT ET BÉNÉFICIAIRES
+--------------------------------------------------------------------------------------
+1.1. Le présent Contrat constitue un accord légal, contraignant et valide entre vous 
+(personne physique ou entité juridique unique, ci-après dénommée "l'Utilisateur", 
+"le Client" ou "Vous") et le propriétaire et créateur exclusif du Logiciel (ci-après 
+dénommé "l'Éditeur", "Nous" ou "l'Entreprise").
+1.2. Ce Contrat régit scrupuleusement votre utilisation du logiciel (ci-après dénommé 
+le "Logiciel"), incluant tout le code objet, le code source le cas échéant, l'interface 
+graphique, les bases de données intégrées, ainsi que tout support associé, document 
+imprimé, et documentation en ligne ou électronique y afférent.
+1.3. En poursuivant le processus d'installation, Vous certifiez expressément avoir la 
+pleine capacité juridique de contracter. Si Vous agissez au nom d'une société ou de 
+toute autre entité juridique, vous attestez et garantissez explicitement avoir reçu 
+le mandat clair et le pouvoir formel d'engager ladite société selon les termes de ce 
+contrat de licence.
+1.4. L'acceptation de ces termes s'applique non seulement à l'installation initiale 
+mais également à chaque session d'utilisation future, de mise à jour ou 
+d'administration système que vous effectuerez. 
+
+--------------------------------------------------------------------------------------
+ARTICLE 2 : CONCESSION ET LIMITATION DE LA LICENCE
+--------------------------------------------------------------------------------------
+2.1. Sous réserve de votre acceptation pleine et entière de toutes les conditions du 
+présent Contrat, et compte tenu du paiement des frais de licence ou d'abonnement au 
+taux convenu (le cas échéant), l'Éditeur Vous accorde de ce fait une licence limitée, 
+strictement personnelle, non exclusive, révocable et non transférable pour installer 
+et utiliser ce Logiciel.
+2.2. La licence est accordée uniquement pour un usage métier défini dans le cadre 
+strict des fonctionnalités natives de l'interface du Logiciel.
+2.3. Toute utilisation du Logiciel ou de ses données sous-jacentes ne s'inscrivant 
+pas expressément et sans équivoque dans les droits accordés par la présente licence 
+est formellement et strictement interdite par les lois en vigueur.
+2.4. Le Logiciel n'est pas vendu ; il Vous est uniquement concédé sous licence pour 
+votre simple utilisation, l'Éditeur y conservant tout titre et droit patrimonial.
+
+--------------------------------------------------------------------------------------
+ARTICLE 3 : COLLECTE, UTILISATION DES DONNÉES ET DÉVELOPPEMENT D'UN FUTUR LOGICIEL
+*** CLAUSE PARTICULIÈRE DE CONSENTEMENT AU TRAITEMENT DES DONNÉES ***
+--------------------------------------------------------------------------------------
+3.1. APPROBATION EXPÈRESSE : En acceptant volontairement les termes de ce contrat, 
+Vous consentez expressément et sans restriction à ce que le Logiciel collecte, 
+transmette en arrière-plan, stocke et traite diverses catégories de données générées 
+par votre utilisation au quotidien.
+3.2. NATURE DES DONNÉES COLLECTÉES : Ces données comprennent, sans que cette liste 
+soit exhaustive : les statistiques d'utilisation du système, les modèles de données 
+métier crées, les métaux de configuration, les journaux d'erreurs d'application, 
+les métriques de temps de chargement, les requêtes de base de données, la télémétrie 
+et toutes métriques comportementales, fonctionnelles et opérationnelles.
+3.3. AMÉLIORATION DU SYSTÈME ACTUEL : Vous reconnaissez et acceptez que ces données 
+seront, dans un premier temps, utilisées à des fins de correction d'anomalies, 
+d'optimisation continue des modules en place, de maintenance réseau et globale, 
+ainsi que pour des processus de tests d'assurance qualité en vue de la fiabilité.
+3.4. TEST ET FONDATION D'UN LOGICIEL FUTUR : ***** IL EST FORMELLEMENT STIPULÉ ET 
+VOUS ACCEPTEZ CLAIREMENT ***** que l'Éditeur collectera, analysera et utilisera vos 
+données de manière pérenne aux fins d'expérimentation, de recherche et développement, 
+ainsi que comme support d'entraînement pour des algorithmes (intelligence artificielle 
+notamment ou machine learning), dans le but unique d'améliorer l'expérience en créant, 
+dans le futur, un "NOUVEAU LOGICIEL PUISSANT ET PERFORMANT". Vos données (ventes, 
+process, etc.) serviront de cas réels et d'exemples de test (test-cases) qui guideront 
+le développement de cette nouvelle plateforme supérieure.
+3.5. PROPRIÉTÉ DE L'INNOVATION : En aucune manière ni sous aucun prétexte, Vous ne 
+pourrez prétendre à des droits de propriété, des droits sociaux, des compensations 
+financières indirectes, ou des royalties sur tous futurs produits logiciels, modules 
+performants ou intelligences artificielles développés par l'Éditeur grâce à vos 
+données. Ces futures solutions logicielles qui résulteront de l'analyse de vos 
+habitudes d'usage seront la propriété seule, exclusive et inaliénable de l'Éditeur.
+3.6. MESURES DE PROTECTION : L'Éditeur s'engage moralement et techniquement à ce que 
+vos données fassent l'objet de processus d'anonymisation et de pseudonymisation 
+lorsqu'elles seront intégrées dans l'architecture des futurs prototypes. 
+3.7. OBLIGATION DE CESSER L'INSTALLATION : Si Vous désapprouvez, sous quelque motif 
+que ce soit, que vos données servent de matériau de test en vue d'affiner, de créer 
+ou d'améliorer le prochain logiciel performant (V2, outils parallèles, etc), il Vous 
+est INTIMÉ L'ORDRE de NE PAS ACCEPTER ce Contrat et d'ANNULER L'INSTALLATION sur-le-champ.
+
+--------------------------------------------------------------------------------------
+ARTICLE 4 : DROIT ET RESTRICTION STRICTE D'UTILISATION
+--------------------------------------------------------------------------------------
+4.1. Vous êtes habilité à installer les composants clients et/ou serveurs de ce 
+Logiciel exclusivement sur les terminaux ou autres équipements serveurs dont Vous êtes 
+le locataire, l'administrateur de droit ou le propriétaire légitime.
+4.2. Vous vous engagez fermement et expressément à ne pas effectuer les actes suivants:
+  a) Copier, dupliquer, plagier le design, l'UX ou la documentation fournie.
+  b) Modifier, altérer, traduire, ou adapter le composant natif du Logiciel.
+  c) Décompiler, procéder à la rétro-ingénierie (reverse engineering), ou tenter par 
+     un moyen détourné, même s'il est techniquement permis par votre appareil, 
+     d'extraire le code source, la structure arborescente de la base de données ou 
+     de déchiffrer les méthodologies d'analyse de données de l'application.
+  d) Louer, prêter, louer à bail, vendre, revendre, concéder une sous-licence, ou 
+     utiliser le Logiciel dans le cadre d'un bureau de service commercial (service 
+     bureau), à l'attention de parties tierces non enregistrées.
+4.3. Vous ne devez en aucun cas employer les fonctions de connectivité de ce Logiciel, 
+sa base de données ou ses API à de quelconque fins que la loi prohiberait.
+4.4. Vous vous interdisez très formellement d'utiliser les concepts logiciels que 
+vous obtiendriez par l'utilisation de ce produit afin de développer, créer, ou faire 
+réaliser par un tiers, un produit similaire visant à le concurrencer sur le marché.
+
+--------------------------------------------------------------------------------------
+ARTICLE 5 : DROITS DE PROPRIÉTÉ INTELLECTUELLE INALIÉNABLES
+--------------------------------------------------------------------------------------
+5.1. Il est expressément entendu que la présente licence opère la délivrance d'un 
+droit de simple utilisation. L'Éditeur garantit être le titulaire de l'ensemble des 
+droits patrimoniaux et moraux relatifs à l'application.
+5.2. Ce Contrat ne Vous octroie, de manière explicite ou implicite, aucun droit sur 
+les brevets sous-jacents, droits d'auteur, droits de marque, habillages commerciaux, 
+innovations en matière d'interface, algorithmes, ou processus métiers.
+5.3. Il est absolument proscrit d'effacer, retirer, masquer, brouiller ou entraver 
+la visibilité des "watermarks", avis de droit d'auteur (copyright), logos de 
+protection ou noms d'entreprise affiliés aux documents de création du Logiciel.
+
+--------------------------------------------------------------------------------------
+ARTICLE 6 : MISES À JOURS TECHNOLOGIQUES ET MAINTENANCE
+--------------------------------------------------------------------------------------
+6.1. Politique de correctif : L'Éditeur peut, mais sans pour autant qu’une obligation 
+pèse sur lui en vertu des présentes, décider d’émettre, à intervalles réguliers ou 
+aléatoires, des composants visant la mise à jour (patches, correctifs, nouvelles 
+versions mineures ou majeures) destinées au dit Logiciel.
+6.2. Continuité de la clause de données : Le fait que l'Éditeur ajoute ou modifie la 
+solution ne Vous exempte pas de l'Article 3, qui continue de rayonner sur tout module 
+postérieurement rattaché au noyau de base (plugins, add-ons). Toutes les données de 
+ces extensions seront pareille ment utilisées pour concevoir un logiciel plus robuste.
+6.3. Discontinuité du service : L'Éditeur est libre de cesser le support technique 
+des versions qui ne correspondent plus à l'état de l'art actuel de ses technologies.
+
+--------------------------------------------------------------------------------------
+ARTICLE 7 : DEVOIR DE CONFIDENTIALITÉ DES PROCESSUS
+--------------------------------------------------------------------------------------
+7.1. Nature des informations : Vous convenez que le processus global de l'application, 
+ses particularités cryptographiques, son interface super-administrateur (SuperAdmin), 
+ainsi que sa méthodologie de facturation et de gestion constituent, aux yeux de la loi, 
+des données extrêmement confidentielles et des secrets commerciaux chers à l'Éditeur.
+7.2. Protection des secrets : Vous prenez l'engagement formel et sérieux de déployer 
+un niveau d'attention à l'égard de ces informations qui ne saurait être inférieur à 
+celui que vous appliquez aux données hautement confidentielles de votre propre société.
+
+--------------------------------------------------------------------------------------
+ARTICLE 8 : DURÉE DU CONTRAT ET RÉVOCATION
+--------------------------------------------------------------------------------------
+8.1. Début : Cet engagement contractuel devient actif et opposable précisément à 
+l'instant où vous validez ce formulaire par une action numérique (clic, touche entrée), 
+scellant ainsi et irrévocablement votre accord total et définitif.
+8.2. Résiliation par le client : Vous avez le libre arbitre de vous soustraire à ce 
+contrat en y mettant fin sans justification. Il vous incombe alors la charge de :
+  a) Désinstaller toute instance logicielle (NodeJS, fichiers Electron, base).
+  b) Effacer méthodiquement vos archives systèmes associées sur l'intégralité de 
+     votre réseau informatique.
+8.3. Résiliation par l'Éditeur : L'Éditeur possède un pouvoir de résiliation de plein 
+droit et sans mise en demeure en cas d'inobservation de l'un de vos devoirs, abus 
+de licence, ou en cas de violation caractérisée des termes touchant la propriété 
+intellectuelle.
+8.4. Les termes ayant attrait à la limitation de responsabilité, de confidentialité,
+et explicitement ceux liés à la collecte de données futures (Article 3), ne 
+s'éteignent pas à la cessation de la présente licence.
+
+--------------------------------------------------------------------------------------
+ARTICLE 9 : MENTION EXPRESSE DE NON-GARANTIE DES RÉSULTATS
+--------------------------------------------------------------------------------------
+9.1. FOURNITURE "EN L'ÉTAT" : LE LOGICIEL EST OFFERT ET DÉLIVRÉ À L'UTILISATEUR DANS 
+SON STATUT ACTUEL, AVEC L'EXCLUSION ABSOLUE DE TOUTE GARANTIE FORME OU INFORME.
+9.2. EXCLUSION IMPLICITE : L'ÉDITEUR DÉNI TOUTES RESPONSABILITÉS QUANT À LA VALEUR 
+MARCHANDE DE LA SOLUTION, SA SOUMISSION À UN CAHIER DES CHARGES EXTERNE, OU LA NON 
+INFRACTION. 
+9.3. L'ÉDITEUR NE PREND AUCUN ENGAGEMENT SELON LEQUEL :
+  a) Les données stockées ne subiront jamais de perte suite à des pannes.
+  b) Le temps de fonctionnement (uptime) sera de 100%.
+  c) La sécurité de vos matériels ne sera jamais contournée par des acteurs 
+     malveillants extérieurs ciblant l'outil ou le réseau attenant.
+
+--------------------------------------------------------------------------------------
+ARTICLE 10 : EXONÉRATION ET LIMITATION DES DOMMAGES ET INTÉRÊTS
+--------------------------------------------------------------------------------------
+10.1. DOMMAGES INDIRECTS : QUELLES QUE SOIENT LES CIRCONSTANCES AYANT CONDUIT AU TORT, 
+NI L'ÉDITEUR, NI SES DÉVELOPPEURS, NI SES SOUS-TRAITANTS NE POURRONT VOIR LEUR 
+RESPONSABILITÉ ENGAGÉE CONCERNANT DES PRÉJUDICES COLLATÉRAUX, FINANCIERS OU MORAUX.
+10.2. L'exclusion de responsabilité englobe spécifiquement : les baisses de chiffres 
+d'affaires pendant les pannes de point de vente (POS), l'altération des bilans, la 
+corruptibilité de l'inventaire menant à des commandes erronées, ainsi que la perte 
+sèche liée aux incidents de sauvegarde.
+10.3. Plafond financier : Si la justice devait impérativement prononcer une condamnation 
+pécuniaire à l'encontre de l'Éditeur, malgré les termes de cet accord, l'indemnisation 
+cumulée au bénéfice de l'Utilisateur serait rigoureusement bornée et limitée à la 
+somme exacte que le plaignant avait déboursée auprès de l'Éditeur pour se procurer 
+cette licence logicielle (l'équivalent de l'abonnement du mois en cours).
+
+--------------------------------------------------------------------------------------
+ARTICLE 11 : DISPOSITIONS LÉGALES ET JURIDICTION COMPÉTENTE
+--------------------------------------------------------------------------------------
+11.1. Intégralité des accords : Le texte écrit sous vos yeux forme avec puissance la 
+seule et unique relation contractuelle entre les parties. Tout antérieur oral, promesse 
+ou plaquette commerciale est caduque face à l'autorité des termes de ce présent accord.
+11.2. Séparabilité des clauses : La déclaration par un organe de jugement d’une 
+nullité concernant un quelconque alinéa de ce texte n'entraîne nul fragment de cause 
+pouvant briser la solidité du reste du document. Les autres clauses de protection de 
+l'Éditeur resteront applicables de la manière la plus stricte.
+11.3. Force Mineure et Majore : L'Éditeur n'est en rien fautif pour l'inaction, les 
+délais ou les défaillances liées à un état de force majeure : catastrophe, tempête 
+solaire, chute des serveurs d'infrastructures DNS mondiaux ou guerre.
+11.4. Loi en présence : Ce CLUF est élaboré sous législation civile de la juridiction 
+de l'Éditeur. Il n'en découle aucun principe de conflits. De plus, seul l'Éditeur est 
+soumis au droit de choisir une juridiction lors d'un litige.
+
+--------------------------------------------------------------------------------------
+ARTICLE 12 : COMPORTEMENT ET IDENTIFICATION DES TIERS
+--------------------------------------------------------------------------------------
+12.1. Responsabilité d'autrui : Vous répondez de manière totale, devant l'Éditeur, 
+concernant le comportement fautif qu'un tiers que vous auriez autorisé à manipuler 
+l'application (employé, stagiaire, partenaire, invité) pourrait engendrer.
+12.2. Validité des audits : L'Éditeur, ou l'un de ses mandataires, possède le droit 
+légitime de vérifier (y compris informatiquement, à distance) l'adéquation de vos 
+structures au présent EULA et notamment face à l'utilisation frauduleuse des "licences 
+multipostes".
+
+--------------------------------------------------------------------------------------
+ARTICLE 13 : ACCORD DÉFINITIF RÉCAPITULATIF
+--------------------------------------------------------------------------------------
+13.1. PAR LE SIMPLE FAIT DE VISUALISER, PARCOURIR, ET AGIR SUR LES BOUTONS LOGICIELS 
+FOURNIS POUR TERMINER L'INSTALLATION, VOUS PROUVEZ ÊTRE UNE PERSONNE RESPONSABLE ET 
+RAISONNEMENT SAINE QUI :
+  - A pris la peine de lire les quelque 200 lignes et plus de cet accord sans saut.
+  - A parfaitement intégré les tenants et aboutissants, tout particulièrement, de la 
+    clause spéciale relative à l'obligation que Vous consentez à transférer toute votre 
+    production de données télémétriques, statistiques et comportementales à l'Éditeur.
+  - Comprend sans aucune distorsion que lesdites données feront office de fondation, 
+    de test, de validation expérimentale ou réelle pour doter l'Éditeur d'une 
+    possibilité exclusive de développer, construire, breveter et vendre dans l'horizon 
+    un nouveau logiciel infiniment plus performant.
+13.2. Vous êtes solennellement avisé que si cette entente (notamment sur le partage 
+des données au profit de la technologie future de l'Éditeur) trouble votre perception 
+du droit des contrats, il vous est impératif : 
+D'ANNULER TOUTE PROCÉDURE, DE FERMER LA FENÊTRE ET DE DÉTRUIRE CE LOGICIEL.
+
+--------------------------------------------------------------------------------------
+FIN DU CONTRAT DE LICENCE UTILISATEUR FINAL.
+--------------------------------------------------------------------------------------
+
+Veuillez sélectionner "J'accepte et Je comprends les termes" pour que le programme 
+puisse poursuivre la décompression et la configuration finale dans votre écosystème, 
+ou "Je refuse" pour procéder à l'abandon pur et simple du déploiement logiciel.
+
+
+========================================================================
+             © 2026 GAS - Tous droits réservés / All rights reserved.
+========================================================================
