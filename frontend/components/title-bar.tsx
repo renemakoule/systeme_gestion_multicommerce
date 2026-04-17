@@ -205,7 +205,7 @@ export const TitleBar = () => {
             <DropdownMenuContent
               align="start"
               sideOffset={8}
-              className="w-48 bg-popover/95 backdrop-blur-md border-border shadow-2xl p-1 no-drag-region rounded-[3px]"
+              className="w-48 bg-popover/95 backdrop-blur-md border-border shadow-2xl p-1 no-drag-region rounded-[3px] pointer-events-auto"
             >
               <DropdownMenuItem
                 onClick={() => {
@@ -213,14 +213,14 @@ export const TitleBar = () => {
                   const url = user ? "/dashboard" : "/auth/login";
                   openTab(`tab-${Date.now()}`, "SESSION", url);
                 }}
-                className="text-[10px] py-2 flex items-center gap-2 cursor-default outline-none rounded-[3px]"
+                className="text-[10px] py-2 flex items-center gap-2 cursor-pointer outline-none rounded-[3px] pointer-events-auto"
               >
                 <Plus size={12} className="text-muted-foreground" />
                 <span>Nouvel Onglet</span>
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => window.electronAPI?.createNewWindow()}
-                className="text-[10px] py-2 flex items-center gap-2 cursor-default outline-none rounded-[3px]"
+                className="text-[10px] py-2 flex items-center gap-2 cursor-pointer outline-none rounded-[3px] pointer-events-auto"
               >
                 <Monitor size={12} className="text-muted-foreground" />
                 <span>Nouvelle Fenêtre</span>
@@ -247,11 +247,11 @@ export const TitleBar = () => {
             <DropdownMenuContent
               align="start"
               sideOffset={8}
-              className="w-48 bg-popover/95 backdrop-blur-md border-border shadow-2xl p-1 no-drag-region rounded-[3px]"
+              className="w-48 bg-popover/95 backdrop-blur-md border-border shadow-2xl p-1 no-drag-region rounded-[3px] pointer-events-auto"
             >
               {/* ── Sous-menu Themes ── */}
               <DropdownMenuSub>
-                <DropdownMenuSubTrigger className="text-[11px] py-2 flex items-center gap-2 cursor-default outline-none rounded-[3px]">
+                <DropdownMenuSubTrigger className="text-[11px] py-2 flex items-center gap-2 cursor-pointer outline-none rounded-[3px] pointer-events-auto">
                   <Palette size={14} className="text-muted-foreground" />
                   <span>Themes</span>
                 </DropdownMenuSubTrigger>
@@ -259,13 +259,13 @@ export const TitleBar = () => {
                 <DropdownMenuPortal>
                   <DropdownMenuSubContent
                     sideOffset={10}
-                    className="w-44 bg-popover/95 backdrop-blur-md border-border shadow-xl p-1 rounded-[3px] max-h-[70vh] overflow-y-auto"
+                    className="w-44 bg-popover/95 backdrop-blur-md border-border shadow-xl p-1 rounded-[3px] max-h-[70vh] overflow-y-auto pointer-events-auto"
                   >
                     {/* Mode clair / sombre */}
                     <DropdownMenuItem
                       id="theme-light"
                       onClick={() => setTheme("light")}
-                      className="text-[10px] py-1.5 flex items-center gap-2 cursor-default outline-none rounded-[3px]"
+                      className="text-[10px] py-1.5 flex items-center gap-2 cursor-pointer pointer-events-auto outline-none rounded-[3px]"
                     >
                       <Sun size={12} />
                       <span className="flex-1">Clair</span>
@@ -276,7 +276,7 @@ export const TitleBar = () => {
                     <DropdownMenuItem
                       id="theme-dark"
                       onClick={() => setTheme("dark")}
-                      className="text-[10px] py-1.5 flex items-center gap-2 cursor-default outline-none rounded-[3px]"
+                      className="text-[10px] py-1.5 flex items-center gap-2 cursor-pointer pointer-events-auto outline-none rounded-[3px]"
                     >
                       <Moon size={12} />
                       <span className="flex-1">Sombre</span>
@@ -296,7 +296,7 @@ export const TitleBar = () => {
                     <DropdownMenuItem
                       id="theme-palette-default"
                       onClick={() => setColorTheme(null)}
-                      className="text-[10px] py-1.5 flex items-center gap-2 cursor-default outline-none rounded-[3px]"
+                      className="text-[10px] py-1.5 flex items-center gap-2 cursor-pointer pointer-events-auto outline-none rounded-[3px]"
                     >
                       <span className="w-3 h-3 rounded-[2px] shrink-0 border border-border bg-gradient-to-br from-muted to-background" />
                       <span className="flex-1">Défaut</span>
@@ -310,7 +310,7 @@ export const TitleBar = () => {
                         key={palette.id}
                         id={`theme-palette-${palette.id}`}
                         onClick={() => setColorTheme(palette.id)}
-                        className="text-[10px] py-1.5 flex items-center gap-2 cursor-default outline-none rounded-[3px]"
+                        className="text-[10px] py-1.5 flex items-center gap-2 cursor-pointer pointer-events-auto outline-none rounded-[3px]"
                         title={palette.description}
                       >
                         <PalettePreview paletteId={palette.id} />
@@ -324,7 +324,7 @@ export const TitleBar = () => {
                 </DropdownMenuPortal>
               </DropdownMenuSub>
 
-              <DropdownMenuItem className="text-[11px] py-2 cursor-default outline-none rounded-[3px]">
+              <DropdownMenuItem className="text-[11px] py-2 cursor-pointer outline-none rounded-[3px] pointer-events-auto">
                 Full Screen
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -341,17 +341,19 @@ export const TitleBar = () => {
       </div>
 
       {/* ICONES DE TOGGLE SIDEBAR / RIGHT PANEL */}
-      <div className="flex items-center gap-1.5 mr-4 no-drag-region">
+      <div className="flex items-center gap-1.5 mr-4 no-drag-region pointer-events-auto">
         <button
           onClick={() => setIsSidebarCollapsed((v) => !v)}
-          className={`p-1.5 rounded-[3px] text-muted-foreground hover:bg-accent/60 hover:text-foreground transition-all ${isSidebarCollapsed ? "opacity-50" : "opacity-100"}`}
+          className="no-drag-region cursor-pointer p-1.5 rounded-[3px] text-muted-foreground hover:bg-accent/60 hover:text-foreground transition-all flex items-center justify-center opacity-100"
+          style={{ opacity: isSidebarCollapsed ? 0.5 : 1 }}
           title="Toggle Primary Side Bar (Ctrl+B)"
         >
           <PanelLeft size={14} />
         </button>
         <button
           onClick={() => setIsRightPanelCollapsed((v) => !v)}
-          className={`p-1.5 rounded-[3px] text-muted-foreground hover:bg-accent/60 hover:text-foreground transition-all ${isRightPanelCollapsed ? "opacity-50" : "opacity-100"}`}
+          className="no-drag-region cursor-pointer p-1.5 rounded-[3px] text-muted-foreground hover:bg-accent/60 hover:text-foreground transition-all flex items-center justify-center opacity-100"
+          style={{ opacity: isRightPanelCollapsed ? 0.5 : 1 }}
           title="Toggle Agent (Ctrl+Alt+B)"
         >
           <PanelRight size={14} />
@@ -359,7 +361,9 @@ export const TitleBar = () => {
       </div>
 
       {/* USER PROFILE BADGE (droite de la barre) */}
-      <UserProfileBadge />
+      <div className="no-drag-region pointer-events-auto">
+        <UserProfileBadge />
+      </div>
 
       <div className="w-[140px] h-full shrink-0" />
     </header>
@@ -502,14 +506,14 @@ function UserProfileBadge() {
 
   return (
     <div
-      className="relative no-drag-region flex items-center mr-2"
+      className="relative no-drag-region flex items-center mr-2 pointer-events-auto"
       ref={panelRef}
     >
       {/* -------- AVATAR CLIQUABLE -------- */}
       <button
         id="user-profile-trigger"
         onClick={handleOpen}
-        className="flex items-center gap-2 px-2 py-1 rounded-[3px] hover:bg-accent/60 transition-all group"
+        className="no-drag-region cursor-pointer flex items-center gap-2 px-2 py-1 rounded-[3px] hover:bg-accent/60 transition-all group pointer-events-auto"
       >
         {/* Avatar initiales */}
         <div className="w-5 h-5 rounded-full bg-[var(--primary-accent)]/20 border border-[var(--primary-accent)]/40 flex items-center justify-center shrink-0">
@@ -539,7 +543,7 @@ function UserProfileBadge() {
       {isOpen && (
         <div
           id="user-profile-panel"
-          className="absolute top-full right-0 mt-2 w-72 bg-popover/98 backdrop-blur-md border border-border/50 shadow-2xl rounded-[4px] overflow-hidden z-[200]"
+          className="absolute top-full right-0 mt-2 w-72 bg-popover/98 backdrop-blur-md border border-border/50 shadow-2xl rounded-[4px] overflow-hidden z-[200] pointer-events-auto"
           style={{ animation: "profileFadeIn 0.15s ease" }}
         >
           {/* Header carte */}
@@ -569,9 +573,6 @@ function UserProfileBadge() {
                 <div className="w-1.5 h-1.5 rounded-full bg-[var(--success)]" />
                 <span className="text-[8px] text-muted-foreground">Actif</span>
               </div>
-              {/* <span className="text-[8px] text-muted-foreground">
-                ID #{user.id}
-              </span> */}
             </div>
           </div>
 
