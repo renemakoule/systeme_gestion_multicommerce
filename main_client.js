@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, ipcMain } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, globalShortcut } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
 const path = require('path');
@@ -102,6 +102,12 @@ ipcMain.on('sync-titlebar', (event, colors) => {
 app.whenReady().then(() => {
   startPython();
   createWindow();
+
+  // Raccourci pour ouvrir les outils de développement en production (Ctrl+Shift+I)
+  globalShortcut.register('CommandOrControl+Shift+I', () => {
+    const win = BrowserWindow.getFocusedWindow();
+    if (win) win.webContents.openDevTools();
+  });
 
   if (!isDev) {
     autoUpdater.checkForUpdatesAndNotify();

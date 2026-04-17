@@ -1,14 +1,14 @@
 {
   "name": "systeme_gestion_market",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "electron-build:client": "electron-builder -c.extraMetadata.main=main_client.js --publish never",
-    "electron-build:superadmin": "electron-builder -c.extraMetadata.main=main_superadmin.js -c.productName=\"NexusControl\" -c.win.icon=\"frontend/public/logo_nexuscontrol.png\" --publish never",
-    "electron-publish:client": "electron-builder -c.extraMetadata.main=main_client.js --publish always",
-    "electron-publish:superadmin": "electron-builder -c.extraMetadata.main=main_superadmin.js -c.productName=\"NexusControl\" -c.win.icon=\"frontend/public/logo_nexuscontrol.png\" --publish always"
+    "electron-build:client": "electron-builder -c.appId=\"com.gas.nexus.client\" -c.extraMetadata.main=main_client.js --publish never",
+    "electron-build:superadmin": "electron-builder -c.appId=\"com.gas.nexus.superadmin\" -c.extraMetadata.main=main_superadmin.js -c.productName=\"NexusControl\" -c.win.icon=\"frontend/public/logo_nexuscontrol.png\" --publish never",
+    "electron-publish:client": "electron-builder -c.appId=\"com.gas.nexus.client\" -c.extraMetadata.main=main_client.js --publish always",
+    "electron-publish:superadmin": "electron-builder -c.appId=\"com.gas.nexus.superadmin\" -c.extraMetadata.main=main_superadmin.js -c.productName=\"NexusControl\" -c.win.icon=\"frontend/public/logo_nexuscontrol.png\" --publish always"
   },
   "build": {
     "appId": "com.gas.nexus",

@@ -2,6 +2,7 @@
 const nextConfig = {
   output: "export", // Génère des fichiers statiques (indispensable pour Electron)
   distDir: "out", // Dossier de sortie
+  trailingSlash: true, // Améliore la résolution des routes statiques sous Electron
   images: {
     unoptimized: true, // Les images Next.js standard demandent un serveur, on les désactive ici
   },
