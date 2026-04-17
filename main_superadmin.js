@@ -1,15 +1,10 @@
-const { app, BrowserWindow, Menu, ipcMain, globalShortcut, protocol, net } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, globalShortcut } = require('electron');
 const { pathToFileURL } = require('url');
 const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
 const path = require('path');
 const { spawn } = require('child_process');
 const isDev = !app.isPackaged;
-
-// 1. Enregistrement du privilège pour le protocole 'nexus'
-protocol.registerSchemesAsPrivileged([
-  { scheme: 'nexus', privileges: { standard: true, secure: true, supportFetchAPI: true } }
-]);
 
 // --- CONFIGURATION AUTO-UPDATER ---
 autoUpdater.logger = log;
@@ -64,11 +59,24 @@ function createWindow(partition = 'persist:main') {
     },
   });
 
+  // INTERCEPTEUR POUR LES CHEMINS ABSOLUS PROPRES À NEXT.JS
+  if (!isDev) {
+    win.webContents.session.webRequest.onBeforeRequest(
+      { urls: ['file:///_next/*', 'file:///static/*', 'file:///fonts/*', 'file:///images/*'] },
+      (details, callback) => {
+        // On récupère le chemin après le file:///
+        const url = details.url.replace('file:///', '');
+        const filePath = path.join(__dirname, 'frontend/out', url);
+        callback({ redirectURL: pathToFileURL(filePath).toString() });
+      }
+    );
+  }
+
   if (isDev) {
     win.loadURL('http://localhost:3000');
   } else {
     // CHARGEMENT DE L'INTERFACE SUPERADMIN VIA PROTOCOLE PERSONNALISÉ
-    win.loadURL('nexus://index.html');
+    win.loadFile(path.join(__dirname, 'frontend/out/index.html'));
   }
 
   win.once('ready-to-show', () => win.show());
@@ -106,18 +114,6 @@ ipcMain.on('sync-titlebar', (event, colors) => {
 });
 
 app.whenReady().then(() => {
-  // 2. Gestionnaire de protocole pour servir les fichiers statiques de Next.js
-  protocol.handle('nexus', (request) => {
-    const url = request.url.replace('nexus://', '');
-    const decodedUrl = decodeURIComponent(url);
-    const relativeUrl = decodedUrl === '' || decodedUrl === '/' ? 'index.html' : decodedUrl;
-    
-    // Chemin vers le dossier 'out' de Next.js
-    const filePath = path.join(__dirname, 'frontend/out', relativeUrl);
-    
-    return net.fetch(pathToFileURL(filePath).toString());
-  });
-
   startPython();
   createWindow();
 
