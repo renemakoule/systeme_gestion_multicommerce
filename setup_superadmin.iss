@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=NexusControl
-AppVersion=1.4.0
+AppVersion=1.4.1
 DefaultDirName={pf}\NexusControl
 DefaultGroupName=NexusControl
 OutputDir=dist/setup

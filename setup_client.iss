@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=GASNexus
-AppVersion=1.4.0
+AppVersion=1.4.1
 DefaultDirName={pf}\GASNexus
 DefaultGroupName=GASNexus
 OutputDir=dist/setup
