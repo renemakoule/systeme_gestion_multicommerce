@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "nexus:client": "electron ./electron/client.js",
-    "nexus:master": "electron ./electron/master.js"
+    "nexus:master": "electron ./electron/master.js",
+    "electron-build": "next build && electron-builder --publish never",
+    "electron-publish": "next build && electron-builder --publish always"
   },
   "main": "electron/main.js",
   "build": {
@@ -17,10 +19,35 @@
     "directories": {
       "output": "dist"
     },
+    "files": [
+      "out/**/*",
+      "electron/**/*",
+      "public/**/*",
+      "node_modules/**/*"
+    ],
     "win": {
       "icon": "public/logo_premium.png",
-      "target": "portable"
-    }
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "renemakoule",
+        "repo": "systeme_gestion_multicommerce",
+        "releaseType": "release"
+      }
+    ]
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

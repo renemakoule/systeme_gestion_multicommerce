@@ -1,8 +1,19 @@
 const { app, BrowserWindow, Menu, ipcMain } = require('electron');
-const { autoUpdater } = require('electron-updater'); // Import pour les mises à jour auto
+const { autoUpdater } = require('electron-updater');
+const log = require('electron-log');
 const path = require('path');
 const { spawn } = require('child_process');
 const isDev = require('electron-is-dev');
+
+// --- CONFIGURATION AUTO-UPDATER ---
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+// Pointe explicitement vers le bon repo GitHub
+autoUpdater.setFeedURL({
+  provider: 'github',
+  owner: 'renemakoule',
+  repo: 'systeme_gestion_multicommerce',
+});
 
 let pyProc = null;
 let mainWindow = null;
@@ -101,14 +112,44 @@ app.whenReady().then(() => {
   }
 });
 
-// Logs et événements pour le suivi de la mise à jour (Optionnel)
-autoUpdater.on('update-available', () => {
-  console.log('Mise à jour disponible ! Téléchargement en cours...');
+// --- AUTO-UPDATER EVENTS ---
+autoUpdater.on('checking-for-update', () => {
+  log.info('Vérification des mises à jour...');
 });
 
-autoUpdater.on('update-downloaded', () => {
-  console.log('Mise à jour téléchargée. Elle sera installée au prochain redémarrage.');
-  // On pourrait envoyer un message IPC au frontend ici pour prévenir le gérant
+autoUpdater.on('update-available', (info) => {
+  log.info(`Mise à jour disponible : v${info.version}`);
+  if (mainWindow) {
+    mainWindow.webContents.send('update-available', info);
+  }
+});
+
+autoUpdater.on('update-not-available', () => {
+  log.info('Application à jour.');
+});
+
+autoUpdater.on('download-progress', (progress) => {
+  const msg = `Téléchargement : ${Math.round(progress.percent)}% (${Math.round(progress.bytesPerSecond / 1024)} KB/s)`;
+  log.info(msg);
+  if (mainWindow) {
+    mainWindow.webContents.send('update-download-progress', progress);
+  }
+});
+
+autoUpdater.on('update-downloaded', (info) => {
+  log.info(`Mise à jour v${info.version} téléchargée. Installation au prochain redémarrage.`);
+  if (mainWindow) {
+    mainWindow.webContents.send('update-downloaded', info);
+  }
+});
+
+autoUpdater.on('error', (err) => {
+  log.error('Erreur auto-updater :', err);
+});
+
+// IPC : Le frontend peut déclencher l'installation manuellement
+ipcMain.on('restart-and-install', () => {
+  autoUpdater.quitAndInstall();
 });
 
 app.on('will-quit', () => {
@@ -117,4 +158,4 @@ app.on('will-quit', () => {
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
-});
+});

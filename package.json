@@ -4,7 +4,49 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron .",
+    "electron-build": "electron-builder --publish never",
+    "electron-publish": "electron-builder --publish always"
+  },
+  "build": {
+    "appId": "com.gas.nexus",
+    "productName": "GASNexus",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "package.json",
+      "frontend/out/**/*",
+      "frontend/public/**/*",
+      "backend/dist/**/*"
+    ],
+    "win": {
+      "icon": "frontend/public/logo_premium.png",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "renemakoule",
+        "repo": "systeme_gestion_multicommerce",
+        "releaseType": "release"
+      }
+    ]
   },
   "keywords": [],
   "author": "",
@@ -12,10 +54,12 @@
   "type": "commonjs",
   "devDependencies": {
     "electron": "^41.1.0",
+    "electron-builder": "^26.8.1",
     "electron-is-dev": "^3.0.1"
   },
   "dependencies": {
     "child_process": "^1.0.2",
+    "electron-log": "^5.4.3",
     "electron-updater": "^6.8.3"
   }
 }
