@@ -105,10 +105,9 @@ export default function WelcomePage() {
               {isLoading ? (
                 <motion.div
                   key="loading"
-                  initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
-                  className="flex items-center gap-3"
+                  className="flex items-center gap-3 text-foreground"
                 >
                   <Loader2 size={12} className="animate-spin" />
                   <span className="text-[10px] sm:text-[9px] font-bold uppercase tracking-widest">
@@ -118,10 +117,9 @@ export default function WelcomePage() {
               ) : (
                 <motion.div
                   key="ready"
-                  initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="flex items-center gap-3"
+                  className="flex items-center gap-3 text-foreground"
                 >
                   <span className="text-[10px] sm:text-[9px] font-bold uppercase tracking-widest">
                     Démarrer le système

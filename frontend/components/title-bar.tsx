@@ -186,14 +186,19 @@ export const TitleBar = () => {
   if (isInFrame) return null;
 
   return (
-    <header className="drag-region fixed top-0 left-0 z-[100] flex h-9 w-full items-center bg-background border-b border-border/50 px-3 transition-colors duration-500 pointer-events-none">
-      <div className="no-drag-region flex items-center h-full pointer-events-auto">
-        <div className="flex items-center gap-2 mr-4 shrink-0">
-          <img
-            src="/logo_premium.png"
-            alt="Logo"
-            className="h-5 w-5 object-contain"
-          />
+    <header className="drag-region fixed top-0 left-0 z-[100] flex h-9 w-full items-center bg-background border-b border-border/50 px-3 transition-colors duration-500">
+      {/* SECTION GAUCHE : Logo + Menus (No-drag pour être cliquables) */}
+      <div className="no-drag-region flex items-center h-full space-x-1">
+        <div 
+          className="flex items-center gap-2 px-2 h-7 hover:bg-accent/30 rounded-md transition-all cursor-pointer group"
+          onClick={() => (window.location.href = "/")}
+        >
+          <div className="relative flex items-center justify-center w-5 h-5 overflow-hidden rounded-full bg-linear-to-br from-[var(--primary-accent)] to-[var(--primary-accent-hover)] shadow-xs group-hover:shadow-[0_0_10px_var(--primary-accent)] transition-all">
+            <div className="text-[10px] font-black text-background">G</div>
+          </div>
+          <span className="text-[10px] font-bold tracking-tight text-foreground/90 group-hover:text-foreground">
+            GAS<span className="text-[var(--primary-accent)]">Nexus</span>
+          </span>
         </div>
 
         <nav className="flex items-center gap-1">
