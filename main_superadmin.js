@@ -3,7 +3,7 @@ const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
 const path = require('path');
 const { spawn } = require('child_process');
-const isDev = require('electron-is-dev');
+const isDev = !app.isPackaged;
 
 // --- CONFIGURATION AUTO-UPDATER ---
 autoUpdater.logger = log;
@@ -25,7 +25,8 @@ function startPython() {
     const pythonPath = path.join(__dirname, 'backend', 'venv', 'Scripts', 'python.exe');
     pyProc = spawn(pythonPath, [script]);
   } else {
-    const executablePath = path.join(process.resourcesPath, 'backend', 'dist', 'main.exe');
+    // Utilisation du dossier unpacked pour l'exécutable compilé
+    const executablePath = path.join(__dirname, '..', 'app.asar.unpacked', 'backend', 'dist', 'main.exe');
     pyProc = spawn(executablePath);
   }
 
