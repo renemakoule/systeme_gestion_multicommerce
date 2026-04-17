@@ -15,6 +15,7 @@ if not exist %ISCC% (
 echo.
 echo [1/6] Compilation du Frontend (Next.js) ...
 cd frontend
+if exist out rmdir /s /q out
 call npm run build
 if %errorlevel% neq 0 (
     echo [ERREUR] Echec de la compilation du frontend.
