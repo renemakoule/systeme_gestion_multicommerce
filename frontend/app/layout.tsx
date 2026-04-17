@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -45,10 +46,14 @@ export default function RootLayout({
           {/* L'ordre est important : le background doit être appliqué sur une div interne */}
           <div className="relative flex flex-col h-full bg-background text-foreground transition-colors duration-500">
             <AppTabsProvider>
-              <TitleBar />
-              <MainLayoutWrapper>
-                <AppTabsLayout>{children}</AppTabsLayout>
-              </MainLayoutWrapper>
+              <Suspense fallback={<div className="h-9 w-full bg-background border-b border-border/50" />}>
+                <TitleBar />
+              </Suspense>
+              <Suspense fallback={<main className="flex-1 overflow-hidden pt-9">{children}</main>}>
+                <MainLayoutWrapper>
+                  <AppTabsLayout>{children}</AppTabsLayout>
+                </MainLayoutWrapper>
+              </Suspense>
             </AppTabsProvider>
           </div>
         </ThemeProvider>

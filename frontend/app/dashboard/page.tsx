@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import { useDashboard } from "@/components/dashboard/DashboardContext";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -45,8 +45,7 @@ const PlaceholderModule = ({ title }: { title: string }) => (
   </div>
 );
 
-export default function DashboardPage() {
-
+function DashboardContent() {
   // Dispatcher pour afficher le bon module
   const renderModule = (option: string) => {
     switch (option) {
@@ -122,7 +121,6 @@ export default function DashboardPage() {
     newOrderEvent, 
     clearNewOrderEvent, 
     setActiveOption,
-    enabledModules, // I'll add this just in case they need it
   } = useDashboard();
   
   const searchParams = useSearchParams();
@@ -187,5 +185,17 @@ export default function DashboardPage() {
         {renderModule(activeOption)}
       </div>
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center h-full">
+        <div className="w-8 h-8 rounded-full border-2 border-dashed border-primary animate-spin" />
+      </div>
+    }>
+      <DashboardContent />
+    </Suspense>
   );
 }
