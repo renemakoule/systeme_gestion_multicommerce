@@ -5,8 +5,10 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "electron-build": "electron-builder --publish never",
-    "electron-publish": "electron-builder --publish always"
+    "electron-build:client": "electron-builder -c.extraMetadata.main=main_client.js --publish never",
+    "electron-build:superadmin": "electron-builder -c.extraMetadata.main=main_superadmin.js -c.productName=\"GASNexus_SuperAdmin\" --publish never",
+    "electron-publish:client": "electron-builder -c.extraMetadata.main=main_client.js --publish always",
+    "electron-publish:superadmin": "electron-builder -c.extraMetadata.main=main_superadmin.js -c.productName=\"GASNexus_SuperAdmin\" --publish always"
   },
   "build": {
     "appId": "com.gas.nexus",
@@ -15,7 +17,8 @@
       "output": "dist"
     },
     "files": [
-      "main.js",
+      "main_client.js",
+      "main_superadmin.js",
       "preload.js",
       "package.json",
       "frontend/out/**/*",
