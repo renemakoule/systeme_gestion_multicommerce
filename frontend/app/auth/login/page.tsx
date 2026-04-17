@@ -112,11 +112,23 @@ export default function AuthPage() {
     "users",
   ]);
 
+  // Safe navigation for Electron
+  const safeNavigate = (path: string) => {
+    if (typeof window !== "undefined" && window.location.protocol === "file:") {
+      // On enlève le / initial s'il existe
+      const cleanPath = path.startsWith("/") ? path.substring(1) : path;
+      // On calcule le retour à la racine depuis /auth/login (profondeur 2)
+      window.location.href = `../../${cleanPath}/index.html`;
+    } else {
+      window.location.href = path;
+    }
+  };
+
   // Auto-redirect if already logged in
   React.useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-      window.location.href = "/dashboard";
+      safeNavigate("/dashboard");
     }
   }, []);
 
@@ -145,9 +157,10 @@ export default function AuthPage() {
 
       // Redirect based on role
       if (data.user.role === "client") {
-        window.location.href = `/ordering?companyId=${data.user.company_id}&table=${data.user.table_number}`;
+        const orderPath = `/ordering?companyId=${data.user.company_id}&table=${data.user.table_number}`;
+        safeNavigate(orderPath);
       } else {
-        window.location.href = "/dashboard";
+        safeNavigate("/dashboard");
       }
     } catch (err: any) {
       setError(err.message);
@@ -281,7 +294,7 @@ export default function AuthPage() {
           size="sm"
           onClick={() =>
             view === "login"
-              ? window.history.back()
+              ? safeNavigate("/")
               : setView(view === "onboarding" ? "signup" : "login")
           }
           className="gap-2 text-muted-foreground hover:text-foreground"

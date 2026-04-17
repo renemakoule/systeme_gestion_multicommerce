@@ -21,7 +21,15 @@ export default function WelcomePage() {
     setIsLoading(true);
     // Simulation d'une initialisation système pour l'effet premium
     await new Promise((resolve) => setTimeout(resolve, 1200));
-    router.push("/auth/login");
+    
+    // Détection de l'environnement Electron de production (file://)
+    if (typeof window !== "undefined" && window.location.protocol === "file:") {
+      // En production, on utilise un chemin relatif pour éviter de chercher à la racine du disque C:
+      // Avec trailingSlash: true, le dossier est auth/login/
+      window.location.href = "auth/login/index.html";
+    } else {
+      router.push("/auth/login");
+    }
   };
 
   return (

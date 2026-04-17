@@ -28,9 +28,9 @@ function walk(dir) {
             const depth = filePath.split(path.sep).length - outDir.split(path.sep).length - 1;
             const prefix = depth > 0 ? '../'.repeat(depth) : './';
             
-            // Regex pour trouver les chemins absolus commençant par /_next, /static, /images, /fonts
-            // (on cherche ces préfixes précédés par src=", href=" ou url(")
-            const pattern = /(src="|href="|url\(")\/(?=_next\/|static\/|images\/|fonts\/|logo_)/g;
+            // Regex pour trouver les chemins absolus commençant par /_next, /static, etc.
+            // On inclut plus de dossiers pour être sûr (favicon, manifest, assets, auth, dashboard)
+            const pattern = /(src="|href="|url\(")\/(?=_next\/|static\/|images\/|fonts\/|logo_|favicon|manifest|assets|auth|dashboard)/g;
             
             if (pattern.test(content)) {
                 // On remplace le "/" par le préfixe relatif approprié
