@@ -15,6 +15,7 @@ interface AppTabsContextType {
   openTab: (id: string, label: string, url: string) => void;
   closeTab: (id: string) => void;
   setTabs: React.Dispatch<React.SetStateAction<Tab[]>>;
+  setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
   isSidebarCollapsed: boolean;
   setIsSidebarCollapsed: (value: boolean | ((prev: boolean) => boolean)) => void;
   isRightPanelCollapsed: boolean;
