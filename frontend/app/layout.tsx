@@ -6,6 +6,7 @@ import { AppTabsProvider } from "@/components/AppTabsContext";
 import { AppTabsLayout } from "@/components/AppTabsLayout";
 import { MainLayoutWrapper } from "@/components/MainLayoutWrapper";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeSync } from "@/components/ThemeSync";
 
 export const metadata: Metadata = {
   title: "GASNexus",
@@ -26,7 +27,7 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className="system-ui antialiased h-screen overflow-hidden dark"
+        className="system-ui antialiased h-screen overflow-hidden"
         style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}
       >
         <ThemeProvider
@@ -36,6 +37,7 @@ export default function RootLayout({
           disableTransitionOnChange
           enableColorScheme={false}
         >
+          <ThemeSync />
           {/* L'ordre est important : le background doit être appliqué sur une div interne */}
           <div className="relative flex flex-col h-full bg-background text-foreground transition-colors duration-500">
             <AppTabsProvider>

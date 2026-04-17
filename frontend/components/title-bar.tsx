@@ -91,6 +91,8 @@ function useColorTheme() {
     } else {
       localStorage.removeItem("color-theme");
     }
+    // Déclenche manuellement l'événement storage pour les iframes (même origine)
+    window.dispatchEvent(new StorageEvent("storage", { key: "color-theme", newValue: id }));
   }, []);
 
   return { colorTheme, setColorTheme };
@@ -264,7 +266,10 @@ export const TitleBar = () => {
                     {/* Mode clair / sombre */}
                     <DropdownMenuItem
                       id="theme-light"
-                      onClick={() => setTheme("light")}
+                      onClick={() => {
+                        setTheme("light");
+                        window.dispatchEvent(new StorageEvent("storage", { key: "theme", newValue: "light" }));
+                      }}
                       className="text-[10px] py-1.5 flex items-center gap-2 cursor-pointer pointer-events-auto outline-none rounded-[3px]"
                     >
                       <Sun size={12} />
@@ -275,7 +280,10 @@ export const TitleBar = () => {
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       id="theme-dark"
-                      onClick={() => setTheme("dark")}
+                      onClick={() => {
+                        setTheme("dark");
+                        window.dispatchEvent(new StorageEvent("storage", { key: "theme", newValue: "dark" }));
+                      }}
                       className="text-[10px] py-1.5 flex items-center gap-2 cursor-pointer pointer-events-auto outline-none rounded-[3px]"
                     >
                       <Moon size={12} />
