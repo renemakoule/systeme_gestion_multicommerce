@@ -1,9 +1,15 @@
-const { app, BrowserWindow, Menu, ipcMain, globalShortcut } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, globalShortcut, protocol, net } = require('electron');
+const { pathToFileURL } = require('url');
 const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
 const path = require('path');
 const { spawn } = require('child_process');
 const isDev = !app.isPackaged;
+
+// 1. Enregistrement du privilège pour le protocole 'app'
+protocol.registerSchemesAsPrivileged([
+  { scheme: 'app', privileges: { standard: true, secure: true, supportFetchAPI: true } }
+]);
 
 // --- CONFIGURATION AUTO-UPDATER ---
 autoUpdater.logger = log;
@@ -59,11 +65,10 @@ function createWindow(partition = 'persist:main') {
   });
 
   if (isDev) {
-    win.loadURL('http://localhost:3000/superadmin/login');
+    win.loadURL('http://localhost:3000');
   } else {
-    // CHARGEMENT DE L'INTERFACE SUPERADMIN
-    // S'assurer que le HTML generé est bien à ce chemin
-    win.loadFile(path.join(__dirname, 'frontend/out/superadmin/login.html'));
+    // CHARGEMENT DE L'INTERFACE SUPERADMIN VIA PROTOCOLE PERSONNALISÉ
+    win.loadURL('app://index.html');
   }
 
   win.once('ready-to-show', () => win.show());
@@ -101,6 +106,18 @@ ipcMain.on('sync-titlebar', (event, colors) => {
 });
 
 app.whenReady().then(() => {
+  // 2. Gestionnaire de protocole pour servir les fichiers statiques de Next.js
+  protocol.handle('app', (request) => {
+    const url = request.url.replace('app://', '');
+    const decodedUrl = decodeURIComponent(url);
+    const relativeUrl = decodedUrl === '' || decodedUrl === '/' ? 'index.html' : decodedUrl;
+    
+    // Chemin vers le dossier 'out' de Next.js
+    const filePath = path.join(__dirname, 'frontend/out', relativeUrl);
+    
+    return net.fetch(pathToFileURL(filePath).toString());
+  });
+
   startPython();
   createWindow();
 
