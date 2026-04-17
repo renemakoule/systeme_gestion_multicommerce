@@ -24,6 +24,7 @@ frontend/next-env.d.ts
 
 # ---- PYTHON / BACKEND ----
 backend/venv/
+backend/build/
 backend/__pycache__/
 backend/**/__pycache__/
 backend/**/*.pyc

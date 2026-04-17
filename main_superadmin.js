@@ -48,6 +48,7 @@ function createWindow(partition = 'persist:main') {
         symbolColor: '#71717a',
         height: 36
     },
+    icon: path.join(__dirname, 'frontend/public/logo_nexuscontrol.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
