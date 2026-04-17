@@ -569,7 +569,7 @@ export const TicketTemplate = React.forwardRef<
         >
           <div className="flex flex-col items-center gap-2">
             <QRCode
-              value={`${typeof window !== "undefined" ? window.location.origin : ""}/ticket/${ticketNumber.replace("#", "")}`}
+              value={`${typeof window !== "undefined" ? window.location.origin : ""}/ticket?id=${ticketNumber.replace("#", "")}`}
               size={110}
             />
             <div

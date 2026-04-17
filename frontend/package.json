@@ -41,7 +41,14 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "license": "license.txt"
+      "license": "license.txt",
+      "multiLanguageInstaller": true,
+      "languages": [
+        "fr_FR",
+        "en_US"
+      ],
+      "deleteAppDataOnUninstall": true,
+      "uninstallDisplayName": "Désinstaller GASNexus"
     },
     "publish": [
       {
