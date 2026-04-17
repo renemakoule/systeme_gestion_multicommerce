@@ -1,0 +1,54 @@
+name: Build and Release GASNexus
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m venv backend/venv
+          backend/venv/Scripts/python -m pip install --upgrade pip
+          backend/venv/Scripts/python -m pip install -r backend/requirements.txt
+          backend/venv/Scripts/python -m pip install pyinstaller
+
+      - name: Build Python Backend
+        run: |
+          cd backend
+          ./venv/Scripts/pyinstaller --noconsole --collect-all uvicorn --collect-all fastapi --collect-all sqlmodel --add-data "static;static" main.py
+        # Le binaire sera dans backend/dist/main.exe
+
+      - name: Install Node Dependencies
+        run: npm install
+
+      - name: Build Frontend
+        run: |
+          cd frontend
+          npm install
+          npm run build
+        # Produit frontend/out
+
+      - name: Build and Publish Electron App
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm run electron-publish:client
+          npm run electron-publish:superadmin

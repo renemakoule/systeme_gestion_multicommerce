@@ -11,8 +11,22 @@ import uvicorn
 import random
 import asyncio
 from typing import List
-from datetime import timedelta
-from contextlib import asynccontextmanager
+from utils.paths import get_uploads_path, get_logs_path, get_base_path
+import logging.handlers
+
+# --- CONFIGURATION LOGS PERSISTANTS ---
+LOG_DIR = get_logs_path()
+log_file = os.path.join(LOG_DIR, "backend.log")
+
+# Configuration de la journalisation (Rotation après 5MB, garde 3 fichiers)
+handler = logging.handlers.RotatingFileHandler(log_file, maxBytes=5*1024*1024, backupCount=3)
+logging.basicConfig(
+    handlers=[handler, logging.StreamHandler()],
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger("GASNexus")
+logger.info("Démarrage du Backend GASNexus...")
 
 from database.db import engine, create_db_and_tables, get_session
 from database.models import Company, User, Sale, Expense, Product, InventoryLog, Category, Supplier, Budget, DiningSession, TechnicalNotification, SystemMessage
@@ -85,26 +99,36 @@ app.add_middleware(
 )
 
 # --- CONFIGURATION DES CHEMINS STATIQUES ---
-# On calcule le chemin absolu vers le dossier static dans backend/
-BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_DIR = os.path.join(BACKEND_DIR, "static")
+# On calcule le chemin vers les uploads dans AppData (Persistant)
+UPLOADS_DIR = get_uploads_path()
+
+# Dossier static interne (lectures seules, logos par défaut)
+INTERNAL_STATIC_DIR = os.path.join(get_base_path(), "backend", "static")
 
 # Créer les dossiers de stockage si nécessaires
-os.makedirs(os.path.join(STATIC_DIR, "uploads", "logos"), exist_ok=True)
-os.makedirs(os.path.join(STATIC_DIR, "uploads", "products"), exist_ok=True)
+os.makedirs(os.path.join(UPLOADS_DIR, "logos"), exist_ok=True)
+os.makedirs(os.path.join(UPLOADS_DIR, "products"), exist_ok=True)
 
-# Intercepter les logos introuvables pour éviter le spam 404 (renvoie une image 1x1 transparente)
+# Intercepter les logos introuvables
 @app.get("/static/uploads/logos/{filename}")
 async def get_logo(filename: str):
-    path = os.path.join(STATIC_DIR, "uploads", "logos", filename)
+    # D'abord on cherche dans AppData
+    path = os.path.join(UPLOADS_DIR, "logos", filename)
     if os.path.exists(path):
         return FileResponse(path)
-    # Image GIF transparente 1x1
+    # Puis dans le dossier interne
+    internal_path = os.path.join(INTERNAL_STATIC_DIR, "uploads", "logos", filename)
+    if os.path.exists(internal_path):
+        return FileResponse(internal_path)
+    
+    # Image GIF transparente 1x1 fallback
     transparent_gif = b'GIF89a\x01\x00\x01\x00\x80\x00\x00\xff\xff\xff\x00\x00\x00!\xf9\x04\x01\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00;'
     return Response(content=transparent_gif, media_type="image/gif", headers={"Cache-Control": "max-age=86400"})
 
-# Servir les fichiers statiques (images, logos...) avec chemin absolu
-app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+# Servir les fichiers statiques
+app.mount("/static/uploads", StaticFiles(directory=UPLOADS_DIR), name="uploads")
+if os.path.exists(INTERNAL_STATIC_DIR):
+    app.mount("/static", StaticFiles(directory=INTERNAL_STATIC_DIR), name="static")
 
 
 # --- MIDDLEWARE DE LOGGING ADAPTATIF ---
@@ -134,15 +158,13 @@ async def log_company_context(request: Request, call_next):
     method = request.method
     path = request.url.path
     if not path.startswith("/static/"):
-        print(f"\033[1;32mINFO\033[0m:    {request.client.host} - \"{method} {path}\"{company_info}")
+        logger.info(f"{request.client.host} - \"{method} {path}\"{company_info}")
     
     try:
         response = await call_next(request)
         return response
     except Exception as e:
-        print(f"\n\033[1;41m ERREUR FATALE (500) \033[0m \033[1;31m{method} {path}\033[0m")
-        traceback.print_exc()
-        print("\n")
+        logger.error(f"ERREUR FATALE (500) {method} {path}", exc_info=True)
         return JSONResponse(
             status_code=500,
             content={"detail": "Internal Server Error", "error": str(e)},
@@ -152,7 +174,13 @@ async def log_company_context(request: Request, call_next):
 # Diagnostic final
 @app.get("/api-test")
 def api_test():
-    return {"status": "ok", "msg": "Backend is running latest code"}
+    import sys
+    return {
+        "status": "ok", 
+        "msg": "Backend is running latest code",
+        "env": "production" if getattr(sys, 'frozen', False) else "development",
+        "app_data": get_uploads_path()
+    }
 
 # Register Routers
 app.include_router(forecasts.router)

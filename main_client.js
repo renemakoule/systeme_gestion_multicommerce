@@ -21,58 +21,72 @@ let mainWindow = null;
 const isHex = (h) => /^#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/.test(h);
 
 function startPython() {
+  const isDev = !app.isPackaged;
+  // Chemin vers l'exécutable Python ou le script
   let script = path.join(__dirname, 'backend', 'main.py');
+  
   if (isDev) {
     const pythonPath = path.join(__dirname, 'backend', 'venv', 'Scripts', 'python.exe');
     pyProc = spawn(pythonPath, [script]);
   } else {
-    // Utilisation du dossier unpacked pour l'exécutable compilé
-    const executablePath = path.join(__dirname, '..', 'app.asar.unpacked', 'backend', 'dist', 'main.exe');
+    // Utilisation du dossier unpacked et process.resourcesPath pour la production
+    // Le binaire est généré par PyInstaller dans backend/dist/main.exe
+    const executablePath = path.join(process.resourcesPath, '..', 'app.asar.unpacked', 'backend', 'dist', 'main.exe');
     pyProc = spawn(executablePath);
   }
 
   if (pyProc != null) {
-    pyProc.stdout.on('data', (data) => console.log(`Python: ${data}`));
-    pyProc.stderr.on('data', (data) => console.error(`Python Error: ${data}`));
+    pyProc.stdout.on('data', (data) => log.info(`Python: ${data}`));
+    pyProc.stderr.on('data', (data) => log.error(`Python Error: ${data}`));
   }
+}
+
+async function checkBackendReady(url, timeoutMs = 15000) {
+    const startTime = Date.now();
+    while (Date.now() - startTime < timeoutMs) {
+        try {
+            const response = await fetch(url);
+            if (response.ok) return true;
+        } catch (e) {
+            // Attendre 500ms avant de re-tenter
+            await new Promise(resolve => setTimeout(resolve, 500));
+        }
+    }
+    return false;
 }
 
 function createWindow(partition = 'persist:main') {
   const win = new BrowserWindow({
     width: 1300,
     height: 900,
-    minWidth: 600,
-    minHeight: 500,
-    show: false,
+    show: false, // On ne montre pas tout de suite
     titleBarStyle: 'hidden',
-    titleBarOverlay: {
-        color: '#00000000',
-        symbolColor: '#71717a',
-        height: 36
-    },
-    icon: path.join(__dirname, 'frontend/public/logo_premium.png'),
+    titleBarOverlay: { color: '#00000000', symbolColor: '#71717a', height: 36 },
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: false,
-      contextIsolation: true,
       partition: partition 
     },
   });
 
-  if (isDev) {
-    win.loadURL('http://localhost:3000');
-  } else {
-    // CHARGEMENT DE L'INTERFACE CLIENT
+  if (app.isPackaged) {
     win.loadFile(path.join(__dirname, 'frontend/out/index.html'));
+  } else {
+    win.loadURL('http://localhost:3000');
   }
 
-  win.once('ready-to-show', () => win.show());
+  // Health check avant affichage
+  checkBackendReady('http://127.0.0.1:8001/api-test').then(isReady => {
+      if (isReady) {
+          win.show();
+      } else {
+          log.error("Backend non prêt après timeout !");
+          // On peut l'afficher quand même en fallback ou montrer une page d'erreur
+          win.show(); 
+      }
+  });
   
   if (!mainWindow) mainWindow = win;
-
-  win.on('closed', () => { 
-    if (win === mainWindow) mainWindow = null;
-  });
+  win.on('closed', () => { if (win === mainWindow) mainWindow = null; });
 
   return win;
 }

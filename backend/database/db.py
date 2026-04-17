@@ -1,16 +1,13 @@
 from sqlmodel import SQLModel, create_engine, Session
 import os
 from dotenv import load_dotenv
+from utils.paths import get_db_path
 
 # Charger les variables d'environnement
 load_dotenv()
 
-# Nom du fichier de la base de données
-SQLITE_FILE_NAME = "systeme_gestion.db"
-# Dossier de base (relatif au dossier backend)
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# Chemin complet de la base
-sqlite_url = f"sqlite:///{os.path.join(os.path.dirname(BASE_DIR), SQLITE_FILE_NAME)}"
+# Chemin complet de la base isolé dans AppData pour la production
+sqlite_url = f"sqlite:///{get_db_path()}"
 
 # Configuration Cloud (Neon.tech)
 cloud_url = os.getenv("CLOUD_DATABASE_URL")
