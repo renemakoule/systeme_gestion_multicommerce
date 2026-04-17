@@ -5,10 +5,10 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "electron-build:client": "npm run fix-paths && electron-builder -c.appId=\"com.gas.nexus.client\" -c.productName=\"GASNexus\" -c.extraMetadata.main=main_client.js --publish never",
-    "electron-build:superadmin": "npm run fix-paths && electron-builder -c.appId=\"com.gas.nexus.superadmin\" -c.productName=\"NexusControl\" -c.extraMetadata.main=main_superadmin.js -c.win.icon=\"frontend/public/logo_nexuscontrol.png\" --publish never",
-    "electron-publish:client": "npm run fix-paths && electron-builder -c.appId=\"com.gas.nexus.client\" -c.productName=\"GASNexus\" -c.extraMetadata.main=main_client.js --publish always",
-    "electron-publish:superadmin": "npm run fix-paths && electron-builder -c.appId=\"com.gas.nexus.superadmin\" -c.productName=\"NexusControl\" -c.extraMetadata.main=main_superadmin.js -c.win.icon=\"frontend/public/logo_nexuscontrol.png\" --publish always",
+    "electron-build:client": "npm run fix-paths && electron-builder -c.appId=\"com.gas.nexus.client\" -c.productName=\"GASNexus\" -c.extraMetadata.main=main_client.js -c.directories.output=dist/client --publish never",
+    "electron-build:superadmin": "npm run fix-paths && electron-builder -c.appId=\"com.gas.nexus.superadmin\" -c.productName=\"NexusControl\" -c.extraMetadata.main=main_superadmin.js -c.win.icon=\"frontend/public/logo_nexuscontrol.png\" -c.directories.output=dist/superadmin --publish never",
+    "electron-publish:client": "npm run fix-paths && electron-builder -c.appId=\"com.gas.nexus.client\" -c.productName=\"GASNexus\" -c.extraMetadata.main=main_client.js -c.directories.output=dist/client --publish always",
+    "electron-publish:superadmin": "npm run fix-paths && electron-builder -c.appId=\"com.gas.nexus.superadmin\" -c.productName=\"NexusControl\" -c.extraMetadata.main=main_superadmin.js -c.win.icon=\"frontend/public/logo_nexuscontrol.png\" -c.directories.output=dist/superadmin --publish always",
     "fix-paths": "node fix-paths.js"
   },
   "build": {

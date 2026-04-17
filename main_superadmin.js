@@ -67,7 +67,7 @@ function createWindow(partition = 'persist:main') {
   });
 
   if (app.isPackaged) {
-    win.loadFile(path.join(__dirname, 'frontend/out/index.html'));
+    win.loadFile(path.join(__dirname, 'frontend/out/superadmin.html'));
   } else {
     win.loadURL('http://localhost:3000');
   }

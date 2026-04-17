@@ -92,7 +92,9 @@ function useColorTheme() {
       localStorage.removeItem("color-theme");
     }
     // Déclenche manuellement l'événement storage pour les iframes (même origine)
-    window.dispatchEvent(new StorageEvent("storage", { key: "color-theme", newValue: id }));
+    window.dispatchEvent(
+      new StorageEvent("storage", { key: "color-theme", newValue: id }),
+    );
   }, []);
 
   return { colorTheme, setColorTheme };
@@ -189,16 +191,17 @@ export const TitleBar = () => {
     <header className="drag-region fixed top-0 left-0 z-[100] flex h-9 w-full items-center bg-background border-b border-border/50 px-3 transition-colors duration-500">
       {/* SECTION GAUCHE : Logo + Menus (No-drag pour être cliquables) */}
       <div className="no-drag-region flex items-center h-full space-x-1">
-        <div 
+        <div
           className="flex items-center gap-2 px-2 h-7 hover:bg-accent/30 rounded-md transition-all cursor-pointer group"
           onClick={() => (window.location.href = "/")}
         >
-          <div className="relative flex items-center justify-center w-5 h-5 overflow-hidden rounded-full bg-linear-to-br from-[var(--primary-accent)] to-[var(--primary-accent-hover)] shadow-xs group-hover:shadow-[0_0_10px_var(--primary-accent)] transition-all">
-            <div className="text-[10px] font-black text-background">G</div>
+          <div className="relative flex items-center justify-center w-5 h-5 overflow-hidden transition-all group-hover:scale-110">
+            <img
+              src="/logo_premium.png"
+              alt="Logo"
+              className="w-full h-full object-contain"
+            />
           </div>
-          <span className="text-[10px] font-bold tracking-tight text-foreground/90 group-hover:text-foreground">
-            GAS<span className="text-[var(--primary-accent)]">Nexus</span>
-          </span>
         </div>
 
         <nav className="flex items-center gap-1">
@@ -273,7 +276,12 @@ export const TitleBar = () => {
                       id="theme-light"
                       onClick={() => {
                         setTheme("light");
-                        window.dispatchEvent(new StorageEvent("storage", { key: "theme", newValue: "light" }));
+                        window.dispatchEvent(
+                          new StorageEvent("storage", {
+                            key: "theme",
+                            newValue: "light",
+                          }),
+                        );
                       }}
                       className="text-[10px] py-1.5 flex items-center gap-2 cursor-pointer pointer-events-auto outline-none rounded-[3px]"
                     >
@@ -287,7 +295,12 @@ export const TitleBar = () => {
                       id="theme-dark"
                       onClick={() => {
                         setTheme("dark");
-                        window.dispatchEvent(new StorageEvent("storage", { key: "theme", newValue: "dark" }));
+                        window.dispatchEvent(
+                          new StorageEvent("storage", {
+                            key: "theme",
+                            newValue: "dark",
+                          }),
+                        );
                       }}
                       className="text-[10px] py-1.5 flex items-center gap-2 cursor-pointer pointer-events-auto outline-none rounded-[3px]"
                     >
