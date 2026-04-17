@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Cpu, ShieldCheck, Globe, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -8,8 +8,14 @@ import Link from "next/link";
 
 export default function WelcomePage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const [year, setYear] = useState("");
   const router = useRouter();
-  const currentYear = new Date().getFullYear();
+
+  useEffect(() => {
+    setIsMounted(true);
+    setYear(new Date().getFullYear().toString());
+  }, []);
 
   const handleStartSystem = async () => {
     setIsLoading(true);
@@ -61,8 +67,9 @@ export default function WelcomePage() {
 
       {/* --- CONTENU CENTRAL --- */}
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: isMounted ? 1 : 0, scale: isMounted ? 1 : 0.95 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         className="z-10 flex flex-col items-center text-center px-4"
       >
         <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.5em] text-muted-foreground mb-4">
@@ -144,7 +151,7 @@ export default function WelcomePage() {
         </div>
         <div className="flex justify-center items-center py-4 px-4 text-center">
           <p className="text-[7px] sm:text-[8px] uppercase tracking-[0.2em] sm:tracking-[0.4em] text-muted-foreground">
-            ©{currentYear}.CM
+            ©{year || "2026"}.CM
             <span className="mx-2 sm:mx-4 text-border">|</span>Powered By GAS
           </p>
         </div>
