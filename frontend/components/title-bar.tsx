@@ -184,8 +184,8 @@ export const TitleBar = () => {
   if (isInFrame) return null;
 
   return (
-    <header className="drag-region fixed top-0 left-0 z-[100] flex h-9 w-full items-center bg-background border-b border-border/50 px-3 transition-colors duration-500">
-      <div className="no-drag-region flex items-center h-full">
+    <header className="drag-region fixed top-0 left-0 z-[100] flex h-9 w-full items-center bg-background border-b border-border/50 px-3 transition-colors duration-500 pointer-events-none">
+      <div className="no-drag-region flex items-center h-full pointer-events-auto">
         <div className="flex items-center gap-2 mr-4 shrink-0">
           <img
             src="/logo_premium.png"
@@ -198,7 +198,7 @@ export const TitleBar = () => {
           {/* Menu Fichier spécifique */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="px-2 py-1 text-[10px] text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors rounded-[3px] cursor-default outline-none">
+              <button className="no-drag-region pointer-events-auto px-2 py-1 text-[10px] text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors rounded-[3px] cursor-pointer outline-none">
                 File
               </button>
             </DropdownMenuTrigger>
@@ -231,7 +231,7 @@ export const TitleBar = () => {
           {mainMenus.map((m) => (
             <button
               key={m}
-              className="px-2 py-1 text-[10px] text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors rounded-[3px] cursor-default outline-none"
+              className="no-drag-region pointer-events-auto px-2 py-1 text-[10px] text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors rounded-[3px] cursor-pointer outline-none"
             >
               {m}
             </button>
@@ -239,7 +239,7 @@ export const TitleBar = () => {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="px-2 py-1 text-[10px] text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors rounded-[3px] cursor-default outline-none">
+              <button className="no-drag-region pointer-events-auto px-2 py-1 text-[10px] text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors rounded-[3px] cursor-pointer outline-none">
                 Window
               </button>
             </DropdownMenuTrigger>
@@ -330,7 +330,7 @@ export const TitleBar = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <button className="px-2 py-1 text-[10px] text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors rounded-[3px] cursor-default outline-none">
+          <button className="no-drag-region pointer-events-auto px-2 py-1 text-[10px] text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors rounded-[3px] cursor-pointer outline-none">
             Help
           </button>
         </nav>
@@ -361,7 +361,7 @@ export const TitleBar = () => {
       {/* USER PROFILE BADGE (droite de la barre) */}
       <UserProfileBadge />
 
-      <div className="w-[110px] h-full shrink-0" />
+      <div className="w-[140px] h-full shrink-0" />
     </header>
   );
 };

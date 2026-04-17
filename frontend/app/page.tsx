@@ -6,7 +6,7 @@ import { ArrowRight, Cpu, ShieldCheck, Globe, Loader2 } from "lucide-react";
 
 export default function WelcomePage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(true);
   const [year, setYear] = useState("");
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export default function WelcomePage() {
 
       {/* --- CONTENU CENTRAL --- */}
       <div
-        className="z-10 flex flex-col items-center text-center px-4"
+        className="z-20 flex flex-col items-center text-center px-4 pointer-events-auto"
         style={{
           animation: "fadeInUp 0.6s ease-out forwards",
         }}
@@ -95,7 +95,7 @@ export default function WelcomePage() {
           <button
             onClick={handleStartSystem}
             disabled={isLoading}
-            className={`rounded-[4px] group relative flex items-center gap-3 border border-border bg-accent/20 px-4 sm:px-5 py-2 transition-all active:scale-95 ${
+            className={`no-drag-region pointer-events-auto cursor-pointer rounded-[4px] group relative flex items-center gap-3 border border-border bg-accent/20 px-4 sm:px-5 py-2 transition-all active:scale-95 ${
               isLoading
                 ? "cursor-not-allowed opacity-70"
                 : "hover:bg-foreground hover:text-background"

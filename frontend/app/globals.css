@@ -1239,6 +1239,7 @@
 .no-drag-region {
   -webkit-app-region: no-drag !important;
   user-select: auto;
+  pointer-events: auto !important;
 }
 
 @media print {
