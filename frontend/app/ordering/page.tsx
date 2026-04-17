@@ -1,8 +1,7 @@
 "use client";
 import { API_URL, WS_URL } from "@/lib/config";
 
-import React, { useState, useEffect, Suspense, useRef } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useState, useEffect, useRef } from "react";
 import {
   ShoppingCart,
   Plus,
@@ -165,10 +164,16 @@ const CategorySkeleton = () => (
 
 
 function OrderingContent() {
-  const searchParams = useSearchParams();
-  const companyId = searchParams.get("companyId");
-  const table = searchParams.get("table");
+  const [companyId, setCompanyId] = useState<string | null>(null);
+  const [table, setTable] = useState<string | null>(null);
 
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      setCompanyId(params.get("companyId"));
+      setTable(params.get("table"));
+    } catch {}
+  }, []);
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
   const [cart, setCart] = useState<any[]>([]);
@@ -727,15 +732,5 @@ function OrderingContent() {
 }
 
 export default function OrderingPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="h-full bg-background flex items-center justify-center">
-          <div className="w-8 h-8 rounded-full border-2 border-dashed border-[var(--primary-accent)] animate-spin" />
-        </div>
-      }
-    >
-      <OrderingContent />
-    </Suspense>
-  );
+  return <OrderingContent />;
 }

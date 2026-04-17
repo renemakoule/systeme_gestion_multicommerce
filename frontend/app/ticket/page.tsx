@@ -1,14 +1,19 @@
 "use client";
 import { API_URL } from "@/lib/config";
 
-import React, { useEffect, useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { TicketTemplate } from "@/components/dashboard/TicketTemplate";
 import { Loader2, AlertCircle, ShoppingBag } from "lucide-react";
 
 function TicketContent() {
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+  const [id, setId] = useState<string | null>(null);
+
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      setId(params.get("id"));
+    } catch {}
+  }, []);
   const [ticketData, setTicketData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -142,14 +147,5 @@ function TicketContent() {
 }
 
 export default function PublicTicketPage() {
-  return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 text-slate-400">
-        <Loader2 className="w-10 h-10 animate-spin mb-4 text-primary" />
-        <p className="text-sm font-medium uppercase tracking-widest">Chargement...</p>
-      </div>
-    }>
-      <TicketContent />
-    </Suspense>
-  );
+  return <TicketContent />;
 }

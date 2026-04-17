@@ -3,7 +3,6 @@ import { API_URL } from "@/lib/config";
 
 import React, { useEffect, useState, useCallback } from "react";
 import { useTheme } from "next-themes";
-import { useSearchParams } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,6 +27,18 @@ import {
 } from "lucide-react";
 import { applyColorTheme } from "@/lib/color-themes";
 import { useAppTabs } from "./AppTabsContext";
+
+// Lecture manuelle des paramètres URL pour éviter useSearchParams()
+// qui bloque l'hydratation en mode export statique (file://)
+function getSearchParam(key: string): string | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(key);
+  } catch {
+    return null;
+  }
+}
 
 // ─── Définition des palettes de couleur ───────────────────────────────────────
 const COLOR_PALETTES = [
@@ -96,9 +107,7 @@ export const TitleBar = () => {
     setIsRightPanelCollapsed,
   } = useAppTabs();
 
-  const searchParams = useSearchParams();
-  const isTabParam = searchParams.get("isTab") === "true";
-  const [isInFrame, setIsInFrame] = useState(isTabParam);
+  const [isInFrame, setIsInFrame] = useState(false);
 
   const mainMenus = ["Edit", "View"];
 
@@ -121,10 +130,9 @@ export const TitleBar = () => {
   }, [setIsSidebarCollapsed, setIsRightPanelCollapsed]);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsInFrame(window.self !== window.top || isTabParam);
-    }
-  }, [isTabParam]);
+    const isTabParam = getSearchParam("isTab") === "true";
+    setIsInFrame(window.self !== window.top || isTabParam);
+  }, []);
 
   // Fonction de conversion robuste RGB(A) vers HEX (6 chiffres uniquement)
   const toHex = (color: string) => {

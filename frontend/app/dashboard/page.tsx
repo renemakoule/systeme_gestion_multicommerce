@@ -1,8 +1,7 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React from "react";
 import { useDashboard } from "@/components/dashboard/DashboardContext";
-import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Utensils } from "lucide-react";
 import { OverviewModule } from "@/components/dashboard/modules/OverviewModule";
@@ -123,8 +122,14 @@ function DashboardContent() {
     setActiveOption,
   } = useDashboard();
   
-  const searchParams = useSearchParams();
-  const moduleParam = searchParams.get("module");
+  const [moduleParam, setModuleParam] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      setModuleParam(params.get("module"));
+    } catch {}
+  }, []);
   
   // Priorité au paramètre d'URL (pour les iframes des onglets)
   const activeOption = moduleParam || contextOption;
@@ -189,13 +194,5 @@ function DashboardContent() {
 }
 
 export default function DashboardPage() {
-  return (
-    <Suspense fallback={
-      <div className="flex items-center justify-center h-full">
-        <div className="w-8 h-8 rounded-full border-2 border-dashed border-primary animate-spin" />
-      </div>
-    }>
-      <DashboardContent />
-    </Suspense>
-  );
+  return <DashboardContent />;
 }
