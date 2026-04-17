@@ -3,14 +3,11 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Cpu, ShieldCheck, Globe, Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 export default function WelcomePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [year, setYear] = useState("");
-  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);
@@ -24,11 +21,9 @@ export default function WelcomePage() {
     
     // Détection de l'environnement Electron de production (file://)
     if (typeof window !== "undefined" && window.location.protocol === "file:") {
-      // En production, on utilise un chemin relatif pour éviter de chercher à la racine du disque C:
-      // Avec trailingSlash: true, le dossier est auth/login/
       window.location.href = "auth/login/index.html";
     } else {
-      router.push("/auth/login");
+      window.location.href = "/auth/login";
     }
   };
 
@@ -74,11 +69,11 @@ export default function WelcomePage() {
       </div>
 
       {/* --- CONTENU CENTRAL --- */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: isMounted ? 1 : 0, scale: isMounted ? 1 : 0.95 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+      <div
         className="z-10 flex flex-col items-center text-center px-4"
+        style={{
+          animation: "fadeInUp 0.6s ease-out forwards",
+        }}
       >
         <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.5em] text-muted-foreground mb-4">
           Core Engine
@@ -140,7 +135,7 @@ export default function WelcomePage() {
             </AnimatePresence>
           </button>
         </div>
-      </motion.div>
+      </div>
 
       {/* --- FOOTER RESPONSIVE --- */}
       <footer className="absolute bottom-0 left-0 w-full">

@@ -1247,3 +1247,29 @@
   .printable-area { position: absolute; left: 0; top: 0; width: 58mm !important; visibility: visible !important; display: block !important; }
   @page { size: 58mm auto; margin: 0; }
 }
+
+/* ============================================================
+   ANIMATIONS CSS PURES (pour Electron production file://)
+   Framer Motion peut ne pas s'hydrater correctement en file://
+   ============================================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes profileFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
