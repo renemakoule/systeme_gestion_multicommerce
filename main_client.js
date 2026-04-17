@@ -59,19 +59,6 @@ function createWindow(partition = 'persist:main') {
     },
   });
 
-  // INTERCEPTEUR POUR LES CHEMINS ABSOLUS PROPRES À NEXT.JS
-  if (!isDev) {
-    win.webContents.session.webRequest.onBeforeRequest(
-      { urls: ['file:///_next/*', 'file:///static/*', 'file:///fonts/*', 'file:///images/*'] },
-      (details, callback) => {
-        // On récupère le chemin après le file:///
-        const url = details.url.replace('file:///', '');
-        const filePath = path.join(__dirname, 'frontend/out', url);
-        callback({ redirectURL: pathToFileURL(filePath).toString() });
-      }
-    );
-  }
-
   if (isDev) {
     win.loadURL('http://localhost:3000');
   } else {
